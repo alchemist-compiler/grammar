@@ -1,0 +1,56 @@
+<!--
+
+GrammarBlock:
+    BlockStart [NewLines Productions] NewLines BlockEnd
+
+Productions:
+    Production {NewLines Production}
+
+Production:
+    Identifier ":" Newline Rules
+
+Rules:
+    OneOfRules
+    ComplexRules
+
+OneOfRules:
+    OneOf NewLine SimpleRules
+
+OneOf:
+    Indent "(" "one" "of" ")"
+
+SimpleRules:
+    SimpleRuleLine {NewLine SimpleRuleLine}
+
+ComplexRules:
+    ComplexRuleLine {NewLine ComplexRuleLine}
+
+SimpleRuleLine:
+    Indent SimpleRule
+
+ComplexRuleLine:
+    Indent ComplexRule
+
+SimpleRule:
+    SimpleTerm {SimpleTerm}
+
+ComplexRule:
+    ComplexTermOptional {ComplexTermOptional}
+
+ComplexTermOptional:
+    ComplexTermAlternative
+    "[" ComplexRule "]"
+    "{" ComplexRule "}"
+
+ComplexTermAlternative:
+    ComplexTerm {"|" ComplexTerm}
+
+SimpleTerm:
+    Identifier
+    Literal
+
+ComplexTerm:
+    SimpleTerm
+    "(" ComplexRule ")"
+
+-->
